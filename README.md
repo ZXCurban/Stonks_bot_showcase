@@ -60,3 +60,10 @@ Production-ready Telegram game bot simulating a virtual stock market with dynami
 
 🟢 Active development
 🚀 Production launch planned
+
+## Documentation
+
+- [Architecture Overview](architecture/overview.md)
+- [Scalability Notes](docs/scaling.md)
+- [Security Considerations](docs/security.md)
+- [Game Design](docs/game-design.md)
