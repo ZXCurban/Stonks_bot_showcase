@@ -1,7 +1,7 @@
 # Architecture Overview
 
 This project is a production-ready Telegram game backend built with an
-event-driven and asynchronous architecture.
+event-driven, asynchronous architecture.
 
 The system is designed to handle:
 - concurrent users
@@ -9,7 +9,8 @@ The system is designed to handle:
 - time-based game mechanics
 - dynamic market simulation
 
-All critical state is externalized and the bot instances remain stateless.
+All critical state is externalized. Bot instances remain stateless and can be
+scaled horizontally.
 
 ## Logical Layers
 
@@ -17,41 +18,41 @@ All critical state is externalized and the bot instances remain stateless.
 - Receives updates from Telegram
 - Stateless handlers
 - Minimal business logic
-- Delegates work to service layer
+- Delegates work to the service layer
+- User interaction flows are controlled via FSM
 
 ### Application / Service Layer
 - Core game mechanics
 - Market simulation
-- Achievements and quests
-- Risk-based mini-games
-- Validation and orchestration
+- Achievements and quest systems
+- Risk-based and time-limited game mechanics
+- Validation, orchestration, and enforcement of game rules
 
 ### Infrastructure Layer
 - PostgreSQL for persistent state
 - Redis for:
-  - cooldowns
-  - temporary game state
-  - rate limiting
+  - cooldowns and temporary state
+  - rate limiting and anti-abuse
   - locks and TTL-based mechanics
-- Background schedulers
+- Isolated background schedulers
 
 ## Background Tasks
 
-The system relies heavily on background schedulers:
+The system relies on background schedulers for non-interactive workloads:
 
 - Market price updates (hourly)
 - Trend recalculation
-- Limited-time events (black market)
-- Cleanup jobs
+- Limited-time events (e.g. underground market)
+- Cleanup and expiration jobs
 - Message lifecycle management
 
-Schedulers are isolated from request handlers and protected from crashes.
+Schedulers are isolated from request handlers and can be restarted
+without affecting active user sessions.
 
 ## Reliability & Anti-Abuse
 
 - Redis-based rate limiting
-- Silent spam mitigation
-- Double-action protection
-- TTL-based locks
-- Idempotent operations
-- Graceful degradation when Redis is unavailable
+- FSM-based double-action protection
+- Cooldown and TTL-enforced mechanics
+- Idempotent service operations
+- Graceful degradation in case of Redis or database failures
