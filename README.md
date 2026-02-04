@@ -1,67 +1,71 @@
 # 📈 Telegram Stock Market Simulator Bot (Showcase)
 
-Production-ready Telegram game bot simulating a virtual stock market with dynamic pricing and user portfolios.
+Production-ready Telegram game backend simulating a virtual stock market with
+dynamic pricing, user portfolios, and time-based game mechanics.
 
-### ⚠️ This repository is a showcase. The production source code is private.
+⚠️ **This repository is a showcase.**  
+The full production codebase is private. Only selected architectural artifacts
+and sanitized examples are provided.
 
 ## 🎯 Project Goals
 
-* Build a scalable Telegram game backend
-* Simulate a stock market environment
-* Handle concurrent users safely
-* Prepare the project for monetization
+- Build a scalable, production-grade Telegram game backend
+- Simulate a dynamic market environment with non-linear behavior
+- Handle concurrent users safely
+- Design the system with future monetization in mind
 
 ## 🚀 Key Features
 
-* Virtual assets and categories
-* Dynamic price updates (scheduled)
-* User portfolios and transactions
-* Achievements system
-* Anti-abuse mechanisms
-* Designed for production use
+- Virtual assets grouped by categories
+- Scheduled and rule-based price updates
+- User portfolios and transactional operations
+- Achievement and progression systems
+- Anti-abuse and rate-limiting mechanisms
+- Designed for long-running production deployment
 
 ## 🧠 Architecture Overview
 
-* Event-driven Telegram bot
-* Asynchronous backend
-* Clear separation between:
-  * handlers
-  * business logic
-  * infrastructure
-  * Stateless bot instances
-### See: architecture/
+- Event-driven Telegram bot architecture
+- Fully asynchronous backend
+- Clear separation between:
+  - Telegram handlers (thin interface layer)
+  - Application and domain logic
+  - Infrastructure and persistence
+- Stateless bot instances with externalized state
+
+See: `architecture/overview.md`
 
 ## 🛠 Tech Stack
 
-* Python 3.x
-* aiogram
-* PostgreSQL
-* Redis
-* async SQLAlchemy
-* Scheduler (cron / APScheduler)
-* Docker
-* Linux (self-hosted)
+- Python 3.x
+- aiogram
+- PostgreSQL
+- Redis
+- async SQLAlchemy
+- Background schedulers (cron / APScheduler)
+- Docker
+- Linux (self-hosted)
 
 ## 🔐 Security & Reliability
 
-* Input validation
-* Rate limiting
-* Redis-based locks
-* Environment-based secrets
-* Isolated production environment
+- Service-layer input validation
+- Redis-based rate limiting and TTL locks
+- Idempotent operations and double-action protection
+- Environment-based secrets management
+- Failure isolation and graceful degradation
 
 ## 📊 Scalability Notes
 
-* Horizontal scaling-ready
-* External state storage (Redis + DB)
-* Scheduler decoupled from bot workers
+- Designed for horizontal scaling
+- Externalized state (Redis + PostgreSQL)
+- Decoupled schedulers and bot workers
 
 ## 📌 Status
 
-🟢 Active development
-🚀 Production launch planned
+- 🟢 Active development
+- 🚀 Production launch planned
 
-## Documentation
+## 📚 Documentation
 
 - [Architecture Overview](architecture/overview.md)
 - [Scalability Notes](docs/scaling.md)
